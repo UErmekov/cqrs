@@ -2,6 +2,7 @@ package com.practice.cqrs.command.service;
 
 import com.practice.cqrs.command.model.aggregate.OrderAggregate;
 import com.practice.cqrs.command.repository.OrderRepository;
+import com.practice.cqrs.enums.OrderState;
 import com.practice.cqrs.events.OrderPlacedEvent;
 import com.practice.cqrs.publisher.DomainEventPublisher;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class OrderServiceCmd {
         aggregate.setId(orderId);
         aggregate.setCustomerId(customerId);
         aggregate.setTotal(total);
-        aggregate.setStatus("PLACED");
+        aggregate.setStatus(OrderState.ORDER_PLACED);
         aggregate.setCreatedAt(Instant.now());
 
         orderRepository.save(aggregate);
